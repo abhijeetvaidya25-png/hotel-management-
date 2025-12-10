@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEase Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Navigation -->
+    <nav class="bg-indigo-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold">StayEase</a>
+                </div>
+                
+                <!-- Main Nav Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-white bg-indigo-800">My Trips</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-indigo-600">Favorites</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-indigo-600">Support</a>
+                    </div>
+                </div>
+
+                <!-- Profile & Notifications -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6 space-x-4">
+                <a href="login.html" id="profile-link" class="flex items-center text-sm rounded-full text-white hover:text-gray-200">
+                    <span class="mr-2" id="profile-link-name">Profile</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </a>
+                        <button class="p-1 rounded-full text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white">
+                            <span class="sr-only">View notifications</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar Section -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <!-- Tabs -->
+            <div class="border-b border-gray-200 mb-4">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <a href="#" class="border-teal-600 text-teal-700 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Search</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">My Trips</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Favorites</a>
+                </nav>
+            </div>
+            <!-- Search Form -->
+            <form class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
+                <div class="md:col-span-1">
+                    <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                    <input type="text" id="location" placeholder="Bali, Indonesia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="check-in" class="block text-sm font-medium text-gray-700">Check-in Date</label>
+                    <input type="text" id="check-in" placeholder="Oct 26 - Nov 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="check-out" class="block text-sm font-medium text-gray-700">Check-out Date</label>
+                    <input type="text" id="check-out" placeholder="Dec 10 - Nov 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="guests" class="block text-sm font-medium text-gray-700">Guests</label>
+                    <input type="text" id="guests" placeholder="2 Guests" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-4 lg:col-span-1">
+                    <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">Search Hotels</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">My Dashboard</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Loading Skeleton -->
+                <div id="loading-skeleton" class="space-y-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+                        <div class="w-full h-64 bg-gray-300"></div>
+                        <div class="p-6">
+                            <div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div>
+                            <div class="h-6 bg-gray-300 rounded w-1/2 mb-4"></div>
+                            <div class="h-5 bg-gray-300 rounded w-1/3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Trip (Dynamic) -->
+                <div id="current-trip-section" class="bg-white rounded-lg shadow-lg overflow-hidden hidden">
+                    <div class="relative">
+                        <img id="current-trip-image" class="w-full h-64 object-cover" src="" alt="Current trip hotel" onerror="this.src='https://placehold.co/800x600/94a3b8/FFFFFF?text=Image+Not+Found'">
+                        <span id="current-trip-nightly-rate" class="absolute top-4 right-4 bg-black bg-opacity-50 text-white text-sm font-medium px-3 py-1 rounded-full"></span>
+                        <span id="current-trip-location-name" class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white text-sm font-medium px-3 py-1 rounded-md"></span>
+                    </div>
+                    <div class="p-6">
+                        <h2 id="current-trip-title" class="text-2xl font-bold text-gray-900"></h2>
+                        <p id="current-trip-dates" class="text-lg text-gray-600 font-medium"></p>
+                        <div class="flex items-center text-gray-500 mt-2">
+                            <svg class="h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.1.41-.22.665-.35l.005-.002c.118-.06.236-.12.354-.18a.968.968 0 0 0 .142-.083c.16-.1.316-.2.468-.3a4.407 4.407 0 0 0 .37-.308l.001-.001c.19-.18.36-.37.51-.57.15-.2.28-.4.4-.6.1-.18.19-.37.27-.55l.002-.005.007-.02.004-.011a.968.968 0 0 0 .044-.11C13.5 14.11 14 12.13 14 10c0-2.21-1.79-4-4-4s-4 1.79-4 4c0 2.13.5 4.11 1.05 5.83l.001.002.002.005.007.02.004.011a.968.968 0 0 0 .044-.11c.08-.18.17-.37.27-.55.12-.2.25-.4.4-.6.15-.2.32-.39.51-.57l.001-.001c.15-.11.3-.21.46-.31.11-.07.23-.13.35-.19.25-.13.48-.25.67-.35.19-.1.39-.19.58-.27l.002-.001.003-.001.003-.001c.1-.04.2-.08.3-.12a5.74 5.74 0 0 1 .58-.25l.002-.001.003-.001c.1-.04.2-.08.3-.12l.004-.002c.09-.03.19-.07.28-.1l.007-.002.01-.003c.19-.07.38-.13.57-.19l.001-.001c.1-.03.2-.06.3-.09l.003-.001.006-.002c.1-.03.2-.06.29-.09l.004-.001c.09-.03.19-.06.28-.08l.003-.001c.1-.02.19-.04.29-.06l.004-.001c.09-.02.19-.04.28-.05l.003-.001c.1-.02.19-.03.29-.04l.003-.001c.1-.01.19-.02.28-.03l.007-.001c.09-.01.19-.02.28-.02l.003-.001c.1-.01.19-.01.29-.01l.003-.001c.1-.01.19-.01.29-.01h.01c.1 0 .19.01.29.01l.003.001c.1 0 .19.01.29.01l.003.001c.09 0 .19.01.28.02l.007.001c.1.01.19.02.28.03l.003.001c.1.01.19.02.29.04l.004.001c.09.02.19.03.28.05l.003.001c.1.02.19.04.29.06l.004.001c.09.03.19.05.28.08l.003.001c.1.03.2.06.29.09l.004.001c.1.03.2.06.3.09l.006.002.003.001c.1.03.2.07.3.09l.001.001c.19.06.38.12.57.19l.01.003.007.002c.09.03.19.07.28.1l.004.002c.1.04.2.08.3.12a5.74 5.74 0 0 1 .58.25l.003.001.002.001c.1.04.2.08.3.12l.003.001.003.001zM10 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="current-trip-city"></span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="booking.html" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- No Current Trip Message -->
+                <div id="no-current-trip" class="hidden bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900">No Current Trip</h2>
+                    <p class="text-gray-600 mt-2">You are not currently checked in anywhere. Why not book a new trip?</p>
+                </div>
+
+
+                <!-- Upcoming Trips -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Upcoming Trips</h3>
+                    <div id="upcoming-trips-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Upcoming Trip Cards will be injected here by JS -->
+                    </div>
+                    <!-- No Upcoming Trips Message -->
+                    <div id="no-upcoming-trips" class="hidden bg-white rounded-lg shadow-md p-6">
+                        <p class="text-gray-600">You have no upcoming trips.</p>
+                    </div>
+                </div>
+
+                <!-- --- NEW SECTION: Explore Hotels --- -->
+                <div class="mt-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Explore Hotels</h2>
+                    
+                    <!-- Loading Skeleton for Hotels -->
+                    <div id="hotels-loading-skeleton" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Skeleton Card -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+                            <div class="w-full h-48 bg-gray-300"></div>
+                            <div class="p-4">
+                                <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+                                <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                            </div>
+                        </div>
+                        <!-- Skeleton Card -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+                            <div class="w-full h-48 bg-gray-300"></div>
+                            <div class="p-4">
+                                <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+                                <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hotel Grid (Dynamic) -->
+                    <div id="hotel-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Hotel cards will be injected here by JS -->
+                    </div>
+                </div>
+                <!-- --- END NEW SECTION --- -->
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Payment Methods -->
+                <div id="payment-methods-section" class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Payment Methods</h3>
+                    <!-- Payment methods will be injected here by JS -->
+                    <button class="mt-4 w-full bg-white hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg shadow-sm">Add New</button>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Personal Info</h3>
+                    <div class="flex items-center space-x-4">
+                        <img class="h-16 w-16 rounded-full object-cover" src="http://googleusercontent.com/image_collection/image_retrieval/2506059216820676708" alt="Profile picture">
+                        <div>
+                            <p id="user-name" class="font-medium text-lg text-gray-900">Loading...</p>
+                            <p id="user-email" class="text-sm text-gray-500">Loading...</p>
+                        </div>
+                    </div>
+                    <button class="mt-6 w-full bg-white hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg shadow-sm">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 mt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Hotel Partner Link -->
+            <a href="hotel-login.html" class="text-sm text-gray-500 hover:text-gray-700 hover:underline">
+                Hotel Partner Login
+            </a>
+
+            <!-- Facebook Icon -->
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Facebook</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.04c-5.5 0-10 4.49-10 10s4.5 10 10 10 10-4.49 10-10S17.5 2.04 12 2.04zM16.5 12.3h-2.2v5.7h-3V12.3H9.5v-2.6h1.8V7.9c0-1.8 1.1-2.8 2.7-2.8h2.2v2.6h-1.3c-.9 0-1 .4-1 1v1.5h2.3l-.3 2.6z" />
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // --- Helper Functions ---
+        
+        /**
+         * Formats a date string (YYYY-MM-DD) to "Month Day" (e.g., "October 26").
+         */
+        function formatShortDate(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr + 'T00:00:00'); // Ensure parsing as local date
+            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+        }
+
+        /**
+         * Formats a number as USD currency.
+         */
+        function formatCurrency(amount) {
+            // --- FIX: Changed to INR and corrected typo Model -> Format ---
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+            // --- END FIX ---
+        }
+
+        /**
+         * Gets a random image for a specific room type.
+         */
+        function getRoomImage(roomType) {
+            // --- FIX: Replaced placeholder links with high-quality online images from Unsplash ---
+            const images = {
+                'Standard': 'https://source.unsplash.com/random/800x600?hotel,room,simple',
+                'Deluxe': 'https://source.unsplash.com/random/800x600?hotel,room,deluxe,modern',
+                'Suite': 'https://source.unsplash.com/random/800x600?hotel,suite,luxury,living',
+                'Family': 'https://source.unsplash.com/random/800x600?hotel,room,family,kids',
+                'default': 'https://source.unsplash.com/random/800x600?hotel,room'
+            };
+            // --- END FIX ---
+            return images[roomType] || images['default'];
+        }
+
+        /**
+         * Generates star rating HTML.
+         */
+        function getStarRating(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+            const emptyStars = 5 - fullStars - halfStar;
+            return '★'.repeat(fullStars) + '☆'.repeat(emptyStars); // Simplified for demo
+        }
+
+
+        // --- Main Page Logic ---
+        document.addEventListener('DOMContentLoaded', async function() {
+            const userName = localStorage.getItem('stayease_user_name');
+            const loadingSkeleton = document.getElementById('loading-skeleton');
+
+            // 1. Check if user is logged in
+            if (!userName) {
+                // Not logged in, redirect to login page
+                // --- FIX: Changed 'login.html' to './login.html' ---
+                // This creates a valid relative URL when running from the filesystem.
+                window.location.href = './login.html';
+                // --- END FIX ---
+                return; // Stop executing script
+            }
+
+            // 2. User is logged in, update profile link
+            document.getElementById('profile-link-name').textContent = userName;
+            
+            // --- Run all data fetching in parallel ---
+            try {
+                // Fetch user data AND hotel data at the same time
+                await Promise.all([
+                    fetchUserData(userName, loadingSkeleton),
+                    fetchHotelList()
+                ]);
+            } catch (error) {
+                console.error("Error during initial page load:", error);
+                // Handle partial or full load failures if necessary
+            }
+        });
+
+        /**
+         * Fetches and populates all user-specific data (dashboard, trips, etc.)
+         */
+        async function fetchUserData(userName, loadingSkeleton) {
+            try {
+                // 3. Fetch dashboard data from the backend
+                const response = await fetch(`http://127.0.0.1:5000/api/user/dashboard?user_name=${encodeURIComponent(userName)}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+
+                // 4. Populate Personal Info
+                document.getElementById('user-name').textContent = data.personal_info.name || 'N/A';
+                document.getElementById('user-email').textContent = data.personal_info.email || 'N/A';
+
+                // 5. Populate Payment Methods
+                const paymentSection = document.getElementById('payment-methods-section');
+                let paymentHtml = '<h3 class="text-xl font-bold text-gray-900 mb-4">Payment Methods</h3>';
+                data.payment_methods.forEach(card => {
+                    paymentHtml += `
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="bg-blue-800 text-white p-2 rounded-md">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3.75m-3.75 2.25h11.25m5.25-5.25h-5.25m5.25 2.25h-5.25m5.25 2.25h-5.25M6 15l-3 3m0 0 3 3m-3-3h18" /></svg>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="font-medium text-gray-900">${card.type}</p>
+                                    <p class="text-sm text-gray-500">**** ${card.last4}</p>
+                                    <p class="text-sm text-gray-500">Expires ${card.expires}</p>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                paymentSection.innerHTML = paymentHtml + paymentSection.innerHTML; // Keep the "Add New" button
+
+                // 6. Populate Current Trip
+                const currentTripSection = document.getElementById('current-trip-section');
+                if (data.current_trip) {
+                    const trip = data.current_trip;
+                    document.getElementById('current-trip-image').src = getRoomImage(trip.room_type);
+                    document.getElementById('current-trip-nightly-rate').textContent = `${formatCurrency(trip.price_per_night)}/night`;
+                    document.getElementById('current-trip-location-name').textContent = `${trip.room_type} at Hotel`; // DB doesn't have hotel name
+                    document.getElementById('current-trip-title').textContent = `Your ${trip.room_type} Room`;
+                    document.getElementById('current-trip-dates').textContent = `${formatShortDate(trip.checkin_date)} - ${formatShortDate(trip.checkout_date)}`;
+                    document.getElementById('current-trip-city').textContent = trip.country;
+                    currentTripSection.classList.remove('hidden');
+                } else {
+                    // Show "No current trip" message
+                    document.getElementById('no-current-trip').classList.remove('hidden');
+                }
+
+                // 7. Populate Upcoming Trips
+                const upcomingList = document.getElementById('upcoming-trips-list');
+                if (data.upcoming_trips && data.upcoming_trips.length > 0) {
+                    let upcomingHtml = '';
+                    data.upcoming_trips.forEach(trip => {
+                        upcomingHtml += `
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <img class="w-full h-40 object-cover" src="${getRoomImage(trip.room_type)}" alt="Upcoming trip hotel" onerror="this.src='https://placehold.co/800x600/94a3b8/FFFFFF?text=Image+Not+Found'">
+                                <div class="p-4">
+                                    <h4 class="font-bold text-lg">Upcoming ${trip.room_type}</h4>
+                                    <p class="text-gray-600 text-sm">${formatShortDate(trip.checkin_date)} - ${formatShortDate(trip.checkout_date)}</p>
+                                    <div class="flex items-center mt-1">
+                                        <span class="text-sm text-yellow-500">${getStarRating(trip.rating)}</span>
+                                        <span class="text-sm text-gray-500 ml-2">(${trip.rating})</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                    upcomingList.innerHTML = upcomingHtml;
+                } else {
+                    // Show "No upcoming trips" message
+                    document.getElementById('no-upcoming-trips').classList.remove('hidden');
+                }
+
+                // 8. Hide loading skeleton
+                loadingSkeleton.classList.add('hidden');
+
+            } catch (error) {
+                console.error('Failed to fetch dashboard data:', error);
+                loadingSkeleton.innerHTML = '<p class="text-red-500">Failed to load dashboard data. Please try again later.</p>';
+            }
+        }
+
+        /**
+         * --- NEW FUNCTION ---
+         * Fetches the list of hotels and populates the "Explore Hotels" section
+         */
+        async function fetchHotelList() {
+            const hotelList = document.getElementById('hotel-list');
+            const skeleton = document.getElementById('hotels-loading-skeleton');
+            
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/hotels');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const hotels = await response.json();
+
+                let hotelHtml = '';
+                hotels.forEach(hotel => {
+                    // Pass hotel ID to booking page via URL parameter
+                    hotelHtml += `
+                        <a href="booking.html?id=${hotel.id}" class="group bg-white rounded-lg shadow-lg overflow-hidden block transition duration-300 hover:shadow-2xl">
+                            <img class="w-full h-48 object-cover" 
+                                 src="${getRoomImage(hotel.room_type)}" 
+                                 alt="${hotel.name}" 
+                                 onerror="this.src='https://placehold.co/800x600/94a3b8/FFFFFF?text=Image+Not+Found'">
+                            <div class="p-4">
+                                <h4 class="font-bold text-lg text-gray-900 group-hover:text-teal-600">${hotel.name}</h4>
+                                <p class="text-gray-600 text-sm">${hotel.location}</p>
+                                <p class="text-lg font-bold text-gray-900 mt-2">${formatCurrency(hotel.price)} <span class="text-sm font-normal text-gray-500">/ night</span></p>
+                            </div>
+                        </a>
+                    `;
+                });
+                hotelList.innerHTML = hotelHtml;
+
+            } catch (error) {
+                console.error('Failed to fetch hotel list:', error);
+                hotelList.innerHTML = '<p class="text-red-500">Could not load hotels. Please try again later.</p>';
+            } finally {
+                skeleton.classList.add('hidden');
+            }
+        }
+        // --- END NEW FUNCTION ---
+    </script>
+
+</body>
+</html>

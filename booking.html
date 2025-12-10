@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Booking - StayEase</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple modal style */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header Navigation -->
+    <nav class="bg-indigo-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold">StayEase</a>
+                </div>
+                
+                <!-- Main Nav Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-indigo-600">My Trips</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-indigo-600">Favorites</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-indigo-600">Support</a>
+                    </div>
+                </div>
+
+                <!-- Profile & Notifications -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6 space-x-4">
+                        <a href="login.html" class="flex items-center text-sm rounded-full text-white hover:text-gray-200">
+                            <span class="mr-2">Profile</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                        </a>
+                        <button class="p-1 rounded-full text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white">
+                            <span class="sr-only">View notifications</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar Section (as per image) -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="border-b border-gray-200 mb-4">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <a href="#" class="border-teal-600 text-teal-700 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Search</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">My Trips</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Favorites</a>
+                </nav>
+            </div>
+            <form class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
+                <!-- Form inputs... same as index.html -->
+                 <div class="md:col-span-1">
+                    <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                    <input type="text" id="location" placeholder="Bali, Indonesia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="check-in" class="block text-sm font-medium text-gray-700">Check-in Date</label>
+                    <input type="text" id="check-in" placeholder="Oct 26 - Nov 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="check-out" class="block text-sm font-medium text-gray-700">Check-out Date</label>
+                    <input type="text" id="check-out" placeholder="Dec 10 - Nov 2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-1">
+                    <label for="guests" class="block text-sm font-medium text-gray-700">Guests</label>
+                    <input type="text" id="guests" placeholder="2 Guests" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+                <div class="md:col-span-4 lg:col-span-1">
+                    <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">Search Hotels</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Complete Your Booking</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Loading Skeleton -->
+                <div id="loading-skeleton" class="space-y-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+                        <div class="w-full h-64 bg-gray-300"></div>
+                        <div class="p-6">
+                            <div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div>
+                            <div class="h-6 bg-gray-300 rounded w-1/2 mb-4"></div>
+                            <div class="border-t border-gray-200 mt-6 pt-6 space-y-3">
+                                <div class="h-5 bg-gray-300 rounded w-full"></div>
+                                <div class="h-5 bg-gray-300 rounded w-full"></div>
+                                <div class="h-5 bg-gray-300 rounded w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Summary (Dynamic) -->
+                <div id="booking-summary" class="bg-white rounded-lg shadow-lg overflow-hidden hidden">
+                    <div class="relative">
+                        <img id="booking-image" class="w-full h-64 object-cover" src="" alt="Hotel room image" onerror="this.src='data:image/jpeg;base64,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'">
+                        <span id="booking-nightly-rate" class="absolute top-4 right-4 bg-black bg-opacity-50 text-white text-sm font-medium px-3 py-1 rounded-full"></span>
+                        <span id="booking-location-name" class="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white text-sm font-medium px-3 py-1 rounded-md"></span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 id="booking-title" class="text-2xl font-bold text-gray-900"></h2>
+                                <p id="booking-dates" class="text-lg text-gray-600 font-medium"></p>
+                            </div>
+                            <span id="booking-total-price" class="text-2xl font-bold text-gray-900"></span>
+                        </div>
+                        <!-- Price Breakdown -->
+                        <div class="border-t border-gray-200 mt-6 pt-6 space-y-3">
+                            <div class="flex justify-between text-lg">
+                                <span class="text-gray-700">Room Rate</span>
+                                <span id="booking-subtotal" class="font-medium text-gray-900"></span>
+                            </div>
+                            <div class="flex justify-between text-lg">
+                                <span class="text-gray-700">Taxes & Fees</span>
+                                <span id="booking-taxes" class="font-medium text-gray-900"></span>
+                            </div>
+                            <div class="flex justify-between text-lg">
+                                <span class="text-gray-700">Discount</span>
+                                <span id="booking-discount" class="font-medium text-gray-900"></span>
+                            </div>
+                            <div class="flex justify-between text-2xl font-bold border-t border-gray-200 pt-4 mt-4">
+                                <span class="text-gray-900">Total</span>
+                                <span id="booking-total-final" class="text-gray-900"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- No Trip Found Message -->
+                <div id="no-trip" class="hidden bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Hotel Not Found</h2>
+                    <p class="text-gray-600 mt-2">The hotel you selected could not be found. Please go back and try again.</p>
+                </div>
+
+
+                <!-- Guest Information -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Your Details</h3>
+                    <!-- FIX: Replaced static form with new dynamic form -->
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="check-in-date" class="block text-sm font-medium text-gray-700">Check-in Date</label>
+                                <select id="check-in-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></select>
+                            </div>
+                            <div>
+                                <label for="check-out-date" class="block text-sm font-medium text-gray-700">Check-out Date</label>
+                                <select id="check-out-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="guests" class="block text-sm font-medium text-gray-700">Number of Guests</label>
+                            <select id="guests" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                <option value="1">1 Guest</option>
+                                <option value="2" selected>2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="full-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="full-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                    </form>
+                    <!-- END FIX -->
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Payment -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Payment</h3>
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="bg-blue-800 text-white p-2 rounded-md">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3.75m-3.75 2.25h11.25m5.25-5.25h-5.25m5.25 2.25h-5.25m5.25 2.25h-5.25M6 15l-3 3m0 0 3 3m-3-3h18" />
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-medium text-gray-900">Credit Card</p>
+                                <p class="text-sm text-gray-500">**** 1234</p>
+                                <p class="text-sm text-gray-500">Expires 08/26</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-4 w-full bg-white hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 border border-gray-300 rounded-lg shadow-sm">Add New</button>
+                </div>
+
+                <!-- Cancelation Policy -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Cancelation Policy</h3>
+                    <p class="text-sm text-gray-600">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+
+                <!-- Confirm & Pay Button -->
+                <div class="mt-8">
+                    <button id="confirm-pay-btn" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg text-lg transition duration-300">
+                        Confirm & Pay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 mt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Hotel Partner Link -->
+            <a href="hotel-login.html" class="text-sm text-gray-500 hover:text-gray-700 hover:underline">
+                Hotel Partner Login
+            </a>
+
+            <!-- Facebook Icon -->
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Facebook</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.04c-5.5 0-10 4.49-10 10s4.5 10 10 10 10-4.49 10-10S17.5 2.04 12 2.04zM16.5 12.3h-2.2v5.7h-3V12.3H9.5v-2.6h1.8V7.9c0-1.8 1.1-2.8 2.7-2.8h2.2v2.6h-1.3c-.9 0-1 .4-1 1v1.5h2.3l-.3 2.6z" />
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="confirmation-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mt-4">Booking Confirmed!</h3>
+            <p class="text-gray-600 mt-2">Thank you for booking with StayEase. Your trip to Bali is confirmed.</p>
+            <p class="text-sm text-gray-500 mt-4">Redirecting to dashboard...</p>
+        </div>
+    </div>
+
+    <script>
+        // --- Helper Functions (Copied from index.html) ---
+        function formatShortDate(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr + 'T00:00:00');
+            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+        }
+
+        function formatCurrency(amount) {
+            // --- FIX: Changed to INR ---
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+            // --- END FIX ---
+        }
+
+        function getRoomImage(roomType) {
+            // --- FIX: Replaced placeholder links with high-quality online images from Unsplash ---
+            const images = {
+                'Standard': 'https://source.unsplash.com/random/800x600?hotel,room,simple',
+                'Deluxe': 'https://source.unsplash.com/random/800x600?hotel,room,deluxe,modern',
+                'Suite': 'https://source.unsplash.com/random/800x600?hotel,suite,luxury,living',
+                'Family': 'https://source.unsplash.com/random/800x600?hotel,room,family,kids',
+                'default': 'https://source.unsplash.com/random/800x600?hotel,room'
+            };
+            // --- END FIX ---
+            return images[roomType] || images['default'];
+        }
+
+        /**
+         * --- NEW: Populates date dropdowns ---
+         */
+        function populateDateDropdowns() {
+            const checkInSelect = document.getElementById('check-in-date');
+            const checkOutSelect = document.getElementById('check-out-date');
+            const today = new Date();
+
+            for (let i = 0; i < 30; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const dateString = date.toISOString().split('T')[0];
+                const readableDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+                
+                const optionIn = document.createElement('option');
+                optionIn.value = dateString;
+                optionIn.textContent = readableDate;
+                checkInSelect.appendChild(optionIn);
+                
+                // Add checkout dates starting from the next day
+                const checkOutDate = new Date(date);
+                checkOutDate.setDate(date.getDate() + 1); // Checkout is at least 1 day after
+                 const checkOutDateString = checkOutDate.toISOString().split('T')[0];
+                const readableCheckOutDate = checkOutDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+
+                const optionOut = document.createElement('option');
+                optionOut.value = checkOutDateString;
+                optionOut.textContent = readableCheckOutDate;
+                checkOutSelect.appendChild(optionOut);
+            }
+        }
+
+        // --- Main Page Logic ---
+        document.addEventListener('DOMContentLoaded', async function() {
+            // --- FIX: This page is now driven by URL parameter, not localStorage ---
+            const loadingSkeleton = document.getElementById('loading-skeleton');
+            const bookingSummary = document.getElementById('booking-summary');
+            const noTripMessage = document.getElementById('no-trip');
+            const confirmButton = document.getElementById('confirm-pay-btn');
+
+            // 1. Populate the date and guest dropdowns
+            populateDateDropdowns();
+
+            // 2. Get the hotel ID from the URL
+            const params = new URLSearchParams(window.location.search);
+            const hotelId = params.get('id');
+
+            if (!hotelId) {
+                // No ID in URL
+                noTripMessage.classList.remove('hidden');
+                loadingSkeleton.classList.add('hidden');
+                confirmButton.disabled = true;
+                return;
+            }
+
+            try {
+                // 3. Fetch this specific hotel's data
+                const response = await fetch(`http://127.0.0.1:5000/api/hotel/details?id=${hotelId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const hotel = await response.json();
+
+                if (hotel && !hotel.error) {
+                    // 4. Calculate prices
+                    // Demo logic: 1 night by default
+                    const nights = 1;
+                    const subtotal = hotel.price * nights;
+                    const taxes = subtotal * 0.1; // 10% tax
+                    const discount = 0; // No discount in this view
+                    const total = subtotal + taxes - discount;
+
+                    // 5. Populate the page
+                    document.getElementById('booking-image').src = getRoomImage(hotel.room_type);
+                    document.getElementById('booking-nightly-rate').textContent = `${formatCurrency(hotel.price)}/night`;
+                    document.getElementById('booking-location-name').textContent = `${hotel.location}`;
+                    document.getElementById('booking-title').textContent = `${hotel.name}`;
+                    document.getElementById('booking-dates').textContent = `Select your dates`; // Changed
+                    
+                    document.getElementById('booking-total-price').textContent = formatCurrency(total);
+                    document.getElementById('booking-subtotal').textContent = formatCurrency(subtotal);
+                    document.getElementById('booking-taxes').textContent = formatCurrency(taxes);
+                    document.getElementById('booking-discount').textContent = `- ${formatCurrency(discount)}`;
+                    document.getElementById('booking-total-final').textContent = formatCurrency(total);
+                    
+                    // Update the confirm button text
+                    confirmButton.textContent = `Confirm & Pay ${formatCurrency(total)}`;
+
+                    // Show the populated summary
+                    bookingSummary.classList.remove('hidden');
+                } else {
+                    // Hotel ID was invalid
+                    noTripMessage.classList.remove('hidden');
+                    confirmButton.disabled = true; // Disable payment
+                }
+
+            } catch (error) {
+                console.error('Failed to fetch hotel data:', error);
+                noTripMessage.classList.remove('hidden');
+                noTripMessage.innerHTML = '<p class="text-red-500">Failed to load trip data. Please try again later.</p>';
+            } finally {
+                // 6. Hide the loading skeleton
+                loadingSkeleton.classList.add('hidden');
+            }
+            // --- END FIX ---
+            
+
+            // Modal logic (unchanged)
+            const modal = document.getElementById('confirmation-modal');
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                    }
+                    setTimeout(function() {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
